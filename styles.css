@@ -1,13 +1,11 @@
 :root{
   --bg:#0d0d0e;
-  --card:#0d0d0e;
   --muted:rgba(255,255,255,0.6);
   --accent-1:#C56BFF;
   --accent-2:#F08BF8;
   --accent-solid:#C56BFF;
   --btn-radius:10px;
-  --max-width:430px; /* close to iPhone 16 Pro Max CSS width */
-  --gap:20px;
+  --max-width:430px;
 }
 
 *{box-sizing:border-box}
@@ -18,7 +16,6 @@ body{
   background:var(--bg);
   color: #fff;
   -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
   display:flex;
   justify-content:center;
   align-items:flex-start;
@@ -30,7 +27,7 @@ body{
 .screen{
   width:100%;
   max-width:var(--max-width);
-  padding: 80px 28px 40px; /* top padding positions content similar to screenshot */
+  padding: 80px 28px 40px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
@@ -52,7 +49,13 @@ body{
   height:72px;
   display:block;
   margin-bottom:4px;
+  object-fit:contain;
 }
+.svg-fallback{ /* ensure SVG scales like image */
+  width:72px;
+  height:72px;
+}
+
 .title{
   margin:0;
   font-size:20px;
@@ -78,7 +81,6 @@ body{
   gap:22px;
 }
 
-/* Buttons */
 .btn{
   width:100%;
   display:inline-flex;
@@ -93,7 +95,6 @@ body{
   font-size:13px;
 }
 
-/* Primary filled sign up */
 .btn-primary{
   color:#fff;
   background:linear-gradient(90deg,var(--accent-1), var(--accent-2));
@@ -101,7 +102,6 @@ body{
   border: none;
 }
 
-/* Divider line (thin) */
 .divider{
   width:100%;
   height:1px;
@@ -110,24 +110,10 @@ body{
   margin: 2px 0 0 0;
 }
 
-/* Outlined login button */
 .btn-outline{
   background: transparent;
   color: var(--accent-solid);
   border: 2px solid rgba(197,107,255,0.85);
   padding:12px 18px;
   box-shadow: none;
-}
-
-/* Slightly reduce width on large screens to mimic phone margins */
-@media (min-width: 380px){
-  .screen{ padding-left:36px; padding-right:36px; }
-}
-
-/* Make sure everything looks good on even narrower devices */
-@media (max-width: 340px){
-  .logo{ width:64px; height:64px; }
-  .title{ font-size:18px; }
-  .tagline{ font-size:12px; }
-  .btn{ padding:12px; font-size:12px; }
 }
