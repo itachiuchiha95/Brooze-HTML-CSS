@@ -6,13 +6,9 @@
   --accent-solid:#C56BFF;
   --btn-radius:10px;
   --max-width:430px;
-  /* iPhone 16 Pro Max device CSS size in CSS pixels (logical width) */
-  --iphone-width: 430px;
-  --iphone-height: 932px;
-  --device-radius: 48px;
-  --device-frame-color: #0b0b0b;
 }
 
+/* Reset / base */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -23,70 +19,27 @@ body{
   -webkit-font-smoothing:antialiased;
   display:flex;
   justify-content:center;
-  align-items:center;
-  padding: 40px 20px;
+  align-items:flex-start;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   min-height:100vh;
 }
 
-/* Device wrapper */
-.device{
-  width: calc(var(--iphone-width) + 36px); /* give some outer padding for bezel */
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  -webkit-user-select:none;
-  user-select:none;
-}
-
-/* Visual device frame */
-.device-frame{
-  width: var(--iphone-width);
-  height: var(--iphone-height);
-  border-radius: var(--device-radius);
-  background: linear-gradient(180deg, #0b0b0b 0%, #0f0f10 100%);
-  box-shadow:
-    0 20px 70px rgba(2,6,23,0.65),
-    inset 0 1px 0 rgba(255,255,255,0.02);
-  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
-  overflow: hidden;
-  position:relative;
-  border: 6px solid rgba(255,255,255,0.02);
-}
-
-/* small top notch indicator (visual only) */
-.device-frame::before{
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 210px;
-  height: 34px;
-  border-radius: 18px;
-  background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.85));
-  box-shadow: 0 1px 0 rgba(255,255,255,0.02);
-  pointer-events: none;
-  opacity: 0.06;
-}
-
-/* Screen content sits inside the device and is scrollable if needed */
+/* Centered mobile screen container (no device frame) */
 .screen{
-  width: 100%;
-  height: 100%;
+  width:100%;
+  max-width:var(--max-width);
   padding: 80px 28px 40px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
   align-items:center;
-  overflow-y:auto;
-  -webkit-overflow-scrolling: touch;
-  background: transparent;
+  gap:12px;
 }
 
 /* Hero area: icon, title, tagline */
 .hero{
   text-align:center;
-  margin-bottom:48px;
+  margin-bottom:28px;
   width:100%;
   display:flex;
   flex-direction:column;
@@ -121,7 +74,7 @@ body{
   opacity:0.95;
 }
 
-/* Controls / buttons area */
+/* Controls / form layout */
 .controls{
   width:100%;
   display:flex;
@@ -132,6 +85,92 @@ body{
   box-sizing:border-box;
 }
 
+.form{
+  width:100%;
+  padding: 8px 6px 0;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  box-sizing:border-box;
+}
+
+/* field wrapper to show border around entire control */
+.field{
+  position:relative;
+  width:100%;
+}
+
+/* floating label style placed in top-left of the border */
+.field .label{
+  position:absolute;
+  top:-10px;
+  left:12px;
+  background:transparent;
+  color:var(--accent-1);
+  font-size:12px;
+  padding:0 6px;
+  pointer-events:none;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* outer border */
+.field .input-wrap{
+  width:100%;
+  border-radius:8px;
+  padding:12px 14px;
+  border:2px solid rgba(197,107,255,0.95);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background: rgba(255,255,255,0.01);
+}
+
+/* plain input styling */
+.input{
+  background:transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size:15px;
+  width:100%;
+  padding:0;
+}
+
+/* subtle placeholder color */
+.input::placeholder{ color: rgba(255,255,255,0.35); }
+
+/* focused/focus-within state */
+.field:focus-within .input-wrap{
+  box-shadow: 0 6px 18px rgba(197,107,255,0.08);
+}
+
+/* password eye button */
+.pw-toggle{
+  background:transparent;
+  border:none;
+  color:var(--muted);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px;
+  cursor:pointer;
+  border-radius:6px;
+}
+.pw-toggle svg{ width:18px; height:18px; display:block; }
+
+/* forgot password link */
+.forgot{
+  width:100%;
+  text-align:right;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:-6px;
+  margin-bottom:6px;
+  text-decoration:none;
+  letter-spacing:0.6px;
+}
+
+/* Buttons */
 .btn{
   width:100%;
   display:inline-flex;
@@ -144,15 +183,16 @@ body{
   font-weight:700;
   letter-spacing:1px;
   font-size:13px;
-}
-
-.btn-primary{
-  color:#fff;
-  background:linear-gradient(90deg,var(--accent-1), var(--accent-2));
-  box-shadow: 0 6px 18px rgba(197,107,255,0.12);
+  cursor:pointer;
   border: none;
 }
+.btn-primary{
+  color:#071227;
+  background:linear-gradient(90deg,var(--accent-1), var(--accent-2));
+  box-shadow: 0 6px 18px rgba(197,107,255,0.12);
+}
 
+/* divider */
 .divider{
   width:100%;
   height:1px;
@@ -161,24 +201,52 @@ body{
   margin: 2px 0 0 0;
 }
 
-.btn-outline{
-  background: transparent;
-  color: var(--accent-solid);
-  border: 2px solid rgba(197,107,255,0.85);
+/* Facebook button */
+.btn-fb{
+  background: #3b5998;
+  color: #fff;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:center;
   padding:12px 18px;
-  box-shadow: none;
+  border-radius:10px;
+}
+.btn-fb .fb-icon{
+  width:22px;
+  height:22px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.1);
+  border-radius:6px;
+  font-weight:700;
 }
 
-/* Small helpers: center the content vertically a touch more like screenshot */
+/* bottom link */
+.footer-links{
+  margin-top:18px;
+  font-size:13px;
+  color:var(--muted);
+  text-align:center;
+}
+.footer-links a{
+  color:var(--accent-1);
+  font-weight:700;
+  text-decoration:none;
+  margin-left:6px;
+}
+
+/* Responsive tweaks */
 @media (min-height: 900px){
   .screen{ padding-top: 120px; }
 }
-
-/* Scale the full device down on narrow viewports so preview fits */
-@media (max-width: 520px){
-  :root{ --scale: calc((100vw - 40px) / (var(--iphone-width) + 36px)); }
-  .device{
-    transform: scale(var(--scale));
-    transform-origin: top center;
+@media (max-width: 420px){
+  .screen{
+    padding-left:20px;
+    padding-right:20px;
   }
+  .logo{ width:64px; height:64px; }
+  .title{ font-size:18px; }
+  .tagline{ font-size:12px; }
 }
