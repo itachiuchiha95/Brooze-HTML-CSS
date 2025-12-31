@@ -1,69 +1,68 @@
 :root{
-  --bg:#0d0d0e;
-  --muted:rgba(255,255,255,0.6);
-  --accent-1:#C56BFF;
-  --accent-2:#F08BF8;
-  --accent-solid:#C56BFF;
-  --btn-radius:10px;
-  --max-width:430px;
+  --bg: #0d0d0e;
+  --surface: rgba(255,255,255,0.02);
+  --muted: rgba(255,255,255,0.65);
+  --accent-1: #C56BFF;
+  --accent-2: #F08BF8;
+  --accent-solid: #C56BFF;
+  --btn-radius: 10px;
+  --content-max: 420px;
+  --gap: 20px;
 }
 
-/* Reset / base */
+/* Reset & base */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
   font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:linear-gradient(180deg,#070707 0%, #0d0d0e 100%);
+  background: linear-gradient(180deg, #070707 0%, var(--bg) 100%);
   color: #fff;
   -webkit-font-smoothing:antialiased;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
 }
 
-/* Centered mobile screen container (no device frame) */
+/* Main centered screen container (mobile width) */
 .screen{
   width:100%;
-  max-width:var(--max-width);
-  padding: 80px 28px 40px;
-  margin:0 auto;
+  max-width:var(--content-max);
+  padding: 56px 20px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:12px;
+  gap: var(--gap);
 }
 
-/* Hero area: icon, title, tagline */
+/* Hero: logo, title, tagline */
 .hero{
-  text-align:center;
-  margin-bottom:28px;
   width:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:12px;
+  gap:8px;
+  margin-top:10px;
+  margin-bottom:6px;
 }
 .logo{
-  width:72px;
-  height:72px;
+  width:70px;
+  height:70px;
   display:block;
-  margin-bottom:4px;
   object-fit:contain;
+  margin-bottom:4px;
+  filter: none;
 }
-.svg-fallback{ /* ensure SVG scales like image */
-  width:72px;
-  height:72px;
-}
-
 .title{
   margin:0;
-  font-size:20px;
+  font-size:22px;
   font-weight:700;
-  letter-spacing:0.3px;
+  letter-spacing:0.2px;
   color:#ffffff;
+  line-height:1;
 }
 .tagline{
   margin:0;
@@ -71,182 +70,87 @@ body{
   color:var(--muted);
   font-weight:500;
   font-size:13px;
+  text-align:center;
+  max-width:320px;
   opacity:0.95;
 }
 
-/* Controls / form layout */
+/* Controls area (buttons / divider) */
 .controls{
   width:100%;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  gap:22px;
-  padding: 0 12px;
-  box-sizing:border-box;
-}
-
-.form{
-  width:100%;
-  padding: 8px 6px 0;
-  display:flex;
-  flex-direction:column;
   gap:18px;
-  box-sizing:border-box;
+  margin-top:14px;
+  align-items:stretch;
 }
 
-/* field wrapper to show border around entire control */
-.field{
-  position:relative;
-  width:100%;
-}
-
-/* floating label style placed in top-left of the border */
-.field .label{
-  position:absolute;
-  top:-10px;
-  left:12px;
-  background:transparent;
-  color:var(--accent-1);
-  font-size:12px;
-  padding:0 6px;
-  pointer-events:none;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* outer border */
-.field .input-wrap{
-  width:100%;
-  border-radius:8px;
-  padding:12px 14px;
-  border:2px solid rgba(197,107,255,0.95);
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background: rgba(255,255,255,0.01);
-}
-
-/* plain input styling */
-.input{
-  background:transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-size:15px;
-  width:100%;
-  padding:0;
-}
-
-/* subtle placeholder color */
-.input::placeholder{ color: rgba(255,255,255,0.35); }
-
-/* focused/focus-within state */
-.field:focus-within .input-wrap{
-  box-shadow: 0 6px 18px rgba(197,107,255,0.08);
-}
-
-/* password eye button */
-.pw-toggle{
-  background:transparent;
-  border:none;
-  color:var(--muted);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:6px;
-  cursor:pointer;
-  border-radius:6px;
-}
-.pw-toggle svg{ width:18px; height:18px; display:block; }
-
-/* forgot password link */
-.forgot{
-  width:100%;
-  text-align:right;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:-6px;
-  margin-bottom:6px;
-  text-decoration:none;
-  letter-spacing:0.6px;
-}
-
-/* Buttons */
+/* Buttons common */
 .btn{
   width:100%;
   display:inline-flex;
-  justify-content:center;
   align-items:center;
-  padding:14px 18px;
-  border-radius:var(--btn-radius);
+  justify-content:center;
+  padding:14px 16px;
+  border-radius:10px;
   text-decoration:none;
-  text-transform:uppercase;
   font-weight:700;
-  letter-spacing:1px;
   font-size:13px;
+  letter-spacing:1px;
+  text-transform:uppercase;
   cursor:pointer;
   border: none;
 }
+
+/* Primary SIGN UP (filled) */
 .btn-primary{
   color:#071227;
-  background:linear-gradient(90deg,var(--accent-1), var(--accent-2));
-  box-shadow: 0 6px 18px rgba(197,107,255,0.12);
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 8px 22px rgba(197,107,255,0.12);
 }
 
-/* divider */
+/* Divider line */
 .divider{
-  width:100%;
   height:1px;
+  width:100%;
   background: rgba(255,255,255,0.06);
   border-radius:1px;
-  margin: 2px 0 0 0;
+  margin: 6px 0;
 }
 
-/* Facebook button */
-.btn-fb{
-  background: #3b5998;
-  color: #fff;
-  display:flex;
-  gap:12px;
-  align-items:center;
-  justify-content:center;
-  padding:12px 18px;
-  border-radius:10px;
-}
-.btn-fb .fb-icon{
-  width:22px;
-  height:22px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background: rgba(255,255,255,0.1);
-  border-radius:6px;
-  font-weight:700;
+/* Outlined LOGIN button */
+.btn-outline{
+  background: transparent;
+  color: var(--accent-solid);
+  border: 2px solid rgba(197,107,255,0.95);
+  padding:12px 16px;
+  box-shadow: none;
 }
 
-/* bottom link */
-.footer-links{
-  margin-top:18px;
-  font-size:13px;
-  color:var(--muted);
-  text-align:center;
-}
-.footer-links a{
-  color:var(--accent-1);
-  font-weight:700;
-  text-decoration:none;
-  margin-left:6px;
+/* Small visual spacing below outline */
+.controls .spacer{
+  height:8px;
 }
 
-/* Responsive tweaks */
-@media (min-height: 900px){
-  .screen{ padding-top: 120px; }
+/* Focus & hover states */
+.btn:focus{ outline: 3px solid rgba(197,107,255,0.12); outline-offset:2px; }
+.btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 12px 30px rgba(197,107,255,0.14); }
+.btn-outline:hover{ background: rgba(197,107,255,0.03); transform: translateY(-1px); }
+
+/* Accessibility: prefer-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  .btn, .btn-primary, .btn-outline { transition: none; transform: none; box-shadow:none; }
 }
-@media (max-width: 420px){
-  .screen{
-    padding-left:20px;
-    padding-right:20px;
-  }
+
+/* Responsive tweaks for very small screens */
+@media (max-width: 360px){
+  .screen{ padding:48px 16px; }
   .logo{ width:64px; height:64px; }
-  .title{ font-size:18px; }
-  .tagline{ font-size:12px; }
+  .title{ font-size:20px; }
+  .btn{ padding:12px 14px; font-size:12px; }
+}
+
+/* Utility: center vertically if lots of space */
+@media (min-height: 800px){
+  .screen{ margin-top:0; }
 }
