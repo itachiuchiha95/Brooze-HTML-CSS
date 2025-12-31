@@ -3,51 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Brooze — Welcome</title>
+  <title>Brooze — Welcome (iPhone 16 Pro Max)</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="screen">
-    <header class="hero">
-      <!-- Primary: external image file (assets/logo.png).
-           If it fails to load the inline SVG fallback will be shown. -->
-      <img
-        class="logo"
-        src="assets/logo.png"
-        alt="Brooze logo"
-        id="logoImg"
-        onerror="this.style.display='none'; document.getElementById('svgFallback').style.display='block';"
-      />
+  <!-- Device wrapper for iPhone 16 Pro Max -->
+  <div class="device" aria-label="iPhone 16 Pro Max preview">
+    <div class="device-frame">
+      <div class="screen" role="main">
+        <header class="hero">
+          <img
+            class="logo"
+            src="assets/logo.png"
+            alt="Brooze logo"
+            id="logoImg"
+            onerror="this.style.display='none'; document.getElementById('svgFallback').style.display='block';"
+          />
 
-      <!-- Inline SVG fallback (hidden by default). It will show if the image fails to load. -->
-      <svg id="svgFallback" class="logo svg-fallback" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="display:none;">
-        <defs>
-          <linearGradient id="g" x1="0" x2="1">
-            <stop offset="0" stop-color="#C56BFF"/>
-            <stop offset="1" stop-color="#F08BF8"/>
-          </linearGradient>
-        </defs>
-        <g fill="none" stroke="url(#g)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M45 8H19c0 0 1.8 17 13 17s13-17 13-17z"/>
-          <path d="M32 25v12" />
-          <path d="M26 45h12" />
-          <path d="M32 25c-3 3-3 7-3 7 0 4 3 9 3 9s3-5 3-9c0 0 0-4-3-7z" />
-        </g>
-        <circle cx="32" cy="20" r="2.6" fill="url(#g)" stroke="none"/>
-      </svg>
+          <svg id="svgFallback" class="logo svg-fallback" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="display:none;">
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="#C56BFF"/>
+                <stop offset="1" stop-color="#F08BF8"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke="url(#g)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M45 8H19c0 0 1.8 17 13 17s13-17 13-17z"/>
+              <path d="M32 25v12" />
+              <path d="M26 45h12" />
+              <path d="M32 25c-3 3-3 7-3 7 0 4 3 9 3 9s3-5 3-9c0 0 0-4-3-7z" />
+            </g>
+            <circle cx="32" cy="20" r="2.6" fill="url(#g)" stroke="none"/>
+          </svg>
 
-      <h1 class="title">Brooze</h1>
-      <p class="tagline">Bar hopping just got more rewarding</p>
-    </header>
+          <h1 class="title">Brooze</h1>
+          <p class="tagline">Bar hopping just got more rewarding</p>
+        </header>
 
-    <main class="controls">
-      <a href="#" class="btn btn-primary">SIGN UP</a>
+        <main class="controls" aria-label="Authentication actions">
+          <a href="#" class="btn btn-primary">SIGN UP</a>
 
-      <div class="divider" aria-hidden="true"></div>
+          <div class="divider" aria-hidden="true"></div>
 
-      <a href="#" class="btn btn-outline">LOGIN</a>
-    </main>
+          <!-- Link to login page -->
+          <a href="login.html" class="btn btn-outline" style="background:transparent;color:var(--accent-1);border:2px solid rgba(197,107,255,0.85);padding:12px 18px;">LOGIN</a>
+        </main>
+      </div>
+    </div>
   </div>
 </body>
 </html>
