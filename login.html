@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Brooze — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="device" aria-label="iPhone 16 Pro Max preview">
+    <div class="device-frame">
+      <div class="screen" role="main">
+        <header class="hero">
+          <img
+            class="logo"
+            src="assets/logo.png"
+            alt="Brooze logo"
+            id="logoImg2"
+            onerror="this.style.display='none'; document.getElementById('svgFallback2').style.display='block';"
+          />
+
+          <svg id="svgFallback2" class="logo svg-fallback" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" style="display:none;">
+            <defs>
+              <linearGradient id="g2" x1="0" x2="1">
+                <stop offset="0" stop-color="#C56BFF"/>
+                <stop offset="1" stop-color="#F08BF8"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke="url(#g2)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M45 8H19c0 0 1.8 17 13 17s13-17 13-17z"/>
+              <path d="M32 25v12" />
+              <path d="M26 45h12" />
+              <path d="M32 25c-3 3-3 7-3 7 0 4 3 9 3 9s3-5 3-9c0 0 0-4-3-7z" />
+            </g>
+            <circle cx="32" cy="20" r="2.6" fill="url(#g2)" stroke="none"/>
+          </svg>
+        </header>
+
+        <form class="form" onsubmit="handleLogin(event)" novalidate>
+          <!-- Email -->
+          <div class="field">
+            <label for="email" class="label">Email</label>
+            <div class="input-wrap">
+              <input id="email" class="input" type="email" name="email" placeholder=" " autocomplete="email" required />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="field">
+            <label for="password" class="label" style="color:var(--muted);">Password</label>
+            <div class="input-wrap" style="border-color: rgba(255,255,255,0.18);">
+              <input id="password" class="input" type="password" name="password" placeholder="Enter Password" autocomplete="current-password" required />
+              <button type="button" class="pw-toggle" aria-label="Toggle password visibility" onclick="togglePassword()">
+                <!-- eye icon -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <a class="forgot" href="#" onclick="event.preventDefault(); alert('Forgot password flow');">FORGOT PASSWORD?</a>
+
+          <!-- Primary login -->
+          <button class="btn btn-primary" type="submit">LOGIN</button>
+
+          <div class="divider" aria-hidden="true"></div>
+
+          <!-- Facebook -->
+          <button class="btn btn-fb" type="button" onclick="alert('Login with Facebook')">
+            <span class="fb-icon">f</span>
+            <span style="letter-spacing:1px;">LOGIN WITH FACEBOOK</span>
+          </button>
+
+          <div class="footer-links">
+            NEW TO BROOZE? <a href="index.html">CREATE AN ACCOUNT</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(){
+      const pw = document.getElementById('password');
+      if(!pw) return;
+      pw.type = pw.type === 'password' ? 'text' : 'password';
+    }
+
+    function handleLogin(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      if(!email || !password){
+        alert('Please enter email and password.');
+        return;
+      }
+      // TODO: Replace with real authentication call.
+      alert('Logging in with: ' + email);
+    }
+  </script>
+</body>
+</html>
