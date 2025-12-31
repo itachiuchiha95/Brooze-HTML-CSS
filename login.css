@@ -17,7 +17,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 500px;
+  max-width: 360px;
 }
 
 .login-form {
@@ -36,7 +36,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   color: #6b7280;
-  font-size: 1rem;
+  font-size: 0.875rem;
   pointer-events: none;
   transition: all 0.2s ease;
   background-color: #000;
@@ -54,18 +54,17 @@ body {
   width: 100%;
   background-color: transparent;
   border: 2px solid #4b5563;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  padding-right: 3rem;
+  border-radius: 0.375rem;
+  padding: 0.875rem 1rem;
   color: #fff;
-  font-size: 1.125rem;
+  font-size: 0.875rem;
   outline: none;
   transition: all 0.2s ease;
 }
 
 .input-wrapper.active .input-field {
   border-color: #a855f7;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
 }
 
 .input-field::placeholder {
@@ -79,7 +78,7 @@ body {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #9ca3af;
+  color: #6b7280;
   cursor: pointer;
   padding: 0.25rem;
   display: flex;
@@ -89,7 +88,7 @@ body {
 }
 
 .toggle-password:hover {
-  color: #d1d5db;
+  color: #9ca3af;
 }
 
 .forgot-password {
