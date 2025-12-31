@@ -4,11 +4,18 @@
   --accent-1: #C56BFF;
   --accent-2: #F08BF8;
   --accent-solid: #C56BFF;
-  --white-10: rgba(255,255,255,0.1);
+  --white-10: rgba(255,255,255,0.10);
   --white-06: rgba(255,255,255,0.06);
   --btn-radius: 10px;
   --content-max: 420px;
   --gap: 18px;
+
+  /* Input state colors */
+  --input-bg: #0b0b0b;                 /* dark interior */
+  --input-passive-border: rgba(255,255,255,0.18); /* passive thin border (as in screenshot) */
+  --input-passive-placeholder: rgba(255,255,255,0.70);
+  --input-active-border-gradient: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  --input-active-shadow: 0 10px 30px rgba(197,107,255,0.10);
 }
 
 /* ---------- Reset & base ---------- */
@@ -85,7 +92,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Input wrapping box (visible border and padding) */
+/* ---------- INPUT BOX STATES ---------- */
+/* Shared input-wrap base */
 .input-wrap {
   width: 100%;
   border-radius: 8px;
@@ -93,22 +101,68 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255,255,255,0.01);
-  transition: box-shadow .18s ease, transform .12s ease;
-  border: 2px solid var(--white-06); /* default */
+  background: var(--input-bg);
+  transition: box-shadow .18s ease, transform .12s ease, border-color .12s ease, background-color .12s ease;
+  /* By default, use the passive border appearance (thin, subtle) */
+  border: 2px solid var(--input-passive-border);
+  position: relative;
+  box-shadow: none;
 }
 
-/* Make the email field use purple border to match screenshot */
-.field.email .input-wrap {
-  border-color: rgba(197,107,255,0.95);
+/* Passive state (explicit) — matches the screenshot you've shown */
+.input-wrap.passive {
+  border-color: var(--input-passive-border);
+  background: var(--input-bg);
+  box-shadow: none;
+  transform: none;
 }
 
-/* Password box has darker subtle border like screenshot */
-.field.password .input-wrap {
-  border-color: rgba(255,255,255,0.18);
+/* If you prefer passive by default, you don't need the .passive class — the base rule above already represents the passive style. */
+
+/* Active state: when field has focus (keyboard active) */
+.field:focus-within .input-wrap {
+  /* Use a subtle purple border + glow. We simulate a gradient outline using a pseudo-element. */
+  border-color: transparent; /* hide base border to show pseudo gradient */
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: var(--input-active-shadow);
 }
 
-/* Input element */
+/* Gradient "outline" for focused input */
+.field:focus-within .input-wrap::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -2px; /* expand slightly outside the input */
+  border-radius: 10px;
+  background: var(--input-active-border-gradient);
+  z-index: 0;
+  filter: blur(6px);
+  opacity: 0.18;
+}
+
+/* To visually place a solid gradient border (inside the blur), we add another pseudo element */
+.field:focus-within .input-wrap::before{
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  padding: 2px; /* keep inner spacing */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude; /* fallback semantics */
+  background: var(--input-active-border-gradient);
+  z-index: 1;
+  opacity: 1;
+}
+
+/* Make the inner content (input and buttons) render above the gradient border layers */
+.input-wrap > * { position: relative; z-index: 2; }
+
+/* ---- Input element styling ---- */
 .input {
   background: transparent;
   border: none;
@@ -119,18 +173,17 @@ body {
   line-height: 1;
 }
 
-/* Placeholder color */
+/* Passive placeholder color (slightly brighter per screenshot) */
 .input::placeholder {
-  color: rgba(255,255,255,0.32);
+  color: var(--input-passive-placeholder);
 }
 
-/* Focus state */
-.field:focus-within .input-wrap {
-  box-shadow: 0 10px 30px rgba(197,107,255,0.08);
-  transform: translateY(-1px);
+/* Focus-visible for keyboard users */
+.field:focus-within .input:focus-visible {
+  outline: none;
 }
 
-/* Password visibility toggle button */
+/* Password visibility toggle */
 .pw-toggle {
   background: transparent;
   border: none;
@@ -144,7 +197,7 @@ body {
 }
 .pw-toggle svg { width: 18px; height: 18px; display: block; }
 
-/* Forgot password link aligned to right */
+/* ---------- Other UI (forgot link / buttons) ---------- */
 .forgot {
   display: block;
   text-align: right;
@@ -155,7 +208,7 @@ body {
   letter-spacing: 0.7px;
 }
 
-/* ---------- Buttons ---------- */
+/* Buttons */
 .btn {
   width: 100%;
   display: inline-flex;
@@ -171,15 +224,13 @@ body {
   cursor: pointer;
   border: none;
 }
-
-/* Primary LOGIN button (filled gradient) */
 .btn-primary {
   color: #071227;
   background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
   box-shadow: 0 10px 30px rgba(197,107,255,0.12);
 }
 
-/* Thin divider line (between login and social) */
+/* thin divider */
 .divider {
   width: 100%;
   height: 1px;
@@ -188,7 +239,7 @@ body {
   margin: 6px 0;
 }
 
-/* Facebook button */
+/* facebook button */
 .btn-fb {
   background: #3b5998;
   color: #fff;
@@ -213,7 +264,7 @@ body {
   font-weight: 700;
 }
 
-/* Bottom CTA */
+/* bottom CTA */
 .footer-links {
   margin-top: 8px;
   text-align: center;
