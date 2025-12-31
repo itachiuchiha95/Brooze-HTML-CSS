@@ -6,6 +6,11 @@
   --accent-solid:#C56BFF;
   --btn-radius:10px;
   --max-width:430px;
+  /* iPhone 16 Pro Max device CSS size in CSS pixels (logical width) */
+  --iphone-width: 430px;
+  --iphone-height: 932px;
+  --device-radius: 48px;
+  --device-frame-color: #0b0b0b;
 }
 
 *{box-sizing:border-box}
@@ -13,25 +18,69 @@ html,body{height:100%}
 body{
   margin:0;
   font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:var(--bg);
+  background:linear-gradient(180deg,#070707 0%, #0d0d0e 100%);
   color: #fff;
   -webkit-font-smoothing:antialiased;
   display:flex;
   justify-content:center;
-  align-items:flex-start;
-  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  align-items:center;
+  padding: 40px 20px;
   min-height:100vh;
 }
 
-/* Screen container sized to phone width */
+/* Device wrapper */
+.device{
+  width: calc(var(--iphone-width) + 36px); /* give some outer padding for bezel */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  -webkit-user-select:none;
+  user-select:none;
+}
+
+/* Visual device frame */
+.device-frame{
+  width: var(--iphone-width);
+  height: var(--iphone-height);
+  border-radius: var(--device-radius);
+  background: linear-gradient(180deg, #0b0b0b 0%, #0f0f10 100%);
+  box-shadow:
+    0 20px 70px rgba(2,6,23,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.02);
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  overflow: hidden;
+  position:relative;
+  border: 6px solid rgba(255,255,255,0.02);
+}
+
+/* small top notch indicator (visual only) */
+.device-frame::before{
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 210px;
+  height: 34px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.85));
+  box-shadow: 0 1px 0 rgba(255,255,255,0.02);
+  pointer-events: none;
+  opacity: 0.06;
+}
+
+/* Screen content sits inside the device and is scrollable if needed */
 .screen{
-  width:100%;
-  max-width:var(--max-width);
+  width: 100%;
+  height: 100%;
   padding: 80px 28px 40px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
   align-items:center;
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch;
+  background: transparent;
 }
 
 /* Hero area: icon, title, tagline */
@@ -46,7 +95,7 @@ body{
 }
 .logo{
   width:72px;
-  height:152.73px;
+  height:72px;
   display:block;
   margin-bottom:4px;
   object-fit:contain;
@@ -79,6 +128,8 @@ body{
   flex-direction:column;
   align-items:center;
   gap:22px;
+  padding: 0 12px;
+  box-sizing:border-box;
 }
 
 .btn{
@@ -116,4 +167,18 @@ body{
   border: 2px solid rgba(197,107,255,0.85);
   padding:12px 18px;
   box-shadow: none;
+}
+
+/* Small helpers: center the content vertically a touch more like screenshot */
+@media (min-height: 900px){
+  .screen{ padding-top: 120px; }
+}
+
+/* Scale the full device down on narrow viewports so preview fits */
+@media (max-width: 520px){
+  :root{ --scale: calc((100vw - 40px) / (var(--iphone-width) + 36px)); }
+  .device{
+    transform: scale(var(--scale));
+    transform-origin: top center;
+  }
 }
